@@ -12,3 +12,7 @@ The whole project can be accessed from a single place. If we decide to use micro
 
 It is easy for everyone to access the information.
 
+### 2022-01-26 The branch master will not be locked from pushing directly
+
+When working together it can be cumbersome to create a symbolic pull request which will be accepted without formal review. Everyone in the team has experience with working with git and github so the risk is considered minimal.
+
