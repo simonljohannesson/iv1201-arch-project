@@ -34,32 +34,32 @@ Requirement specification says that a mobile app should be developed in the futu
 * Allows for building decoupled modules.
 * Handover requirement, since Spring Boot is commonly used it is suitable to use since developers with experience from the actual framework or even similar frameworks more easily will be able to understand it than others that may be more obscure.
 
-### 2022-01-29 JPA should be used for object to relational mapping
+### 2022-01-28 JPA should be used for object to relational mapping
 
 Object to relational mapping can be used to abstract away the SQL from the application and thus if used correctly will increase the speed of development. At least in theory. JPA, is commonly used.
 
-### 2022-01-29 PostgreSQL is chosen to be the database
+### 2022-01-28 PostgreSQL is chosen to be the database
 
 * JPA has support
 * Dialect is not believed to have great importance initially
 * Maps directly with the previous database
 * Since data is highly structured and being able to query the database may be important it is deemed that using a document based database is not suitable.
 
-### 2022-01-29 Docker should be used for development and deployment of the backend and frontend
+### 2022-01-28 Docker should be used for development and deployment of the backend and frontend
 
 * Well supported for Spring Boot
 * Easy to use with Vue projects
 * Desired since it makes sure that all developers use the same environment for development
 * Cloud solution agnostic
 
-### 2022-01-29 Vue + Bootstrap should be used for frontend
+### 2022-01-28 Vue + Bootstrap should be used for frontend
 
 * All developers in team have experience with vue
 * Bootstrap works well with Vue and makes development fast with pre-canned components
 * Bootstrap makes it easy to support all major browers according to the requriement specification
 * Both frameworks commonly used and easily understood makes for easier handover according to the requirement specification.
 
-### 2022-01-29 Documentation backend
+### 2022-01-28 Documentation backend
 
 * The REST API should be documented
 * Javadoc should be used to document all public definitons in the backend.
