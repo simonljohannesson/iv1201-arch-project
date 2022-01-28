@@ -20,11 +20,11 @@ It is easy for everyone to access the information.
 
 When working together it can be cumbersome to create a symbolic pull request which will be accepted without formal review. Everyone in the team has experience with working with git and github so the risk is considered minimal.
 
-### 2022-01-29 REST API should be used
+### 2022-01-28 REST API should be used
 
 Requirement specification says that a mobile app should be developed in the future, so to secure the project for this it is deemed best to produce a backend that supports platform independent frontends on client side.
 
-### 2022-01-29 Java Spring Boot
+### 2022-01-28 Java Spring Boot
 
 * Java is a well known language so it should be easy to find competent developers in the future, all developers in the team knows it well.
 * Learning a new language is not feasable considering the short time span of the project.
