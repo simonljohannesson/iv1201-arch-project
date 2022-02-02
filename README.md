@@ -69,3 +69,6 @@ Big community, a lot documentation, often used in tutorials, team has some exper
 
 ### 2022-02-02 Backend should be monolith.
 The team wanted to create the backend using microservices but considering the added complexity, it appears that there are limited perks for the application if microservices is chosen. Creating the backend as a monolith is likely to take a lot less time and should be easier to maintain and understand if the requirement specification will remain somewhat static for a long time.
+
+### 2022-02-02 Team will use Github Projects to organize tasks and work
+It is simple and similar to how the team has worked in the passed, and it allows the team to keep all information in the same place (github).
