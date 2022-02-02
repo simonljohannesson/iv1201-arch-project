@@ -64,4 +64,8 @@ Object to relational mapping can be used to abstract away the SQL from the appli
 * The REST API should be documented
 * Javadoc should be used to document all public definitons in the backend.
 
+### 2022-02-02 Maven should be used as a build tool for the backend.
+Big community, a lot documentation, often used in tutorials, team has some experience. Config files are verbose to a point where it is easy to understand what is going on which the team sees as a positive. Gradle was considered, but the energy needed to learn a new tool would be better spent on something else.
 
+### 2022-02-02 Backend should be monolith.
+The team wanted to create the backend using microservices but considering the added complexity, it appears that there are limited perks for the application if microservices is chosen. Creating the backend as a monolith is likely to take a lot less time and should be easier to maintain and understand if the requirement specification will remain somewhat static for a long time.
