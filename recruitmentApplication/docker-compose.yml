@@ -1,0 +1,10 @@
+version: '3.1'
+services:
+  backend:
+    image: maven:3.8.4-openjdk-17-slim
+    command: mvn spring-boot:run
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/usr/src/mymaven:rw
+    working_dir: /usr/src/mymaven
