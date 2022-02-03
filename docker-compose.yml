@@ -17,7 +17,7 @@ services:
   database:
     image: postgres
     container_name: recruitmentDB
-    restart: always
+    restart: unless-stopped
     ports:
       - 5432:5432
     environment:
@@ -29,7 +29,7 @@ services:
       # Uncomment below to maintain the peristant data
       # - platops-data:/var/lib/postgresql/data/
       # Uncomment bellow to intialize the container with data by creating the respective file
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./existing-database.sql:/docker-entrypoint-initdb.d/existing-database.sql
     networks:
       - recruitmentNetwork
 
