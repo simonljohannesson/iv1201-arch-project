@@ -1,5 +1,6 @@
-package se.kth.iv1201.group6.recruitmentApplication.person;
+package se.kth.iv1201.group6.recruitmentApplication.model.person;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +13,12 @@ public class Person {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long person_id;
+    @Column(name = "person_id")
+    private Long id;
     
     private String name;
-    private String surname;
+    @Column(name = "surname") // name in database
+    private String last_name;
     private String pnr;
     private String email;
     private String password;
@@ -23,11 +26,11 @@ public class Person {
     private String username;
 
     public Long getId() {
-        return this.person_id;
+        return this.id;
     };
     
     public void setId(Long id) {
-        this.person_id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -38,12 +41,12 @@ public class Person {
         this.name = name;
     }
     
-    public String getSurname() {
-        return this.surname;
+    public String getLast_name() {
+        return this.last_name;
     }
     
-    public void setSurnameame(String surname) {
-        this.surname = surname;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
     
     public String getPnr() {
