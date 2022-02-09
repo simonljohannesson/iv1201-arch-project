@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class HelloController {
     @GetMapping("/hello")
-//    @PreAuthorize("hasAnyRole('ROLE_RECRUITER')")
     public String hello(){
         return """
         <html>
@@ -21,7 +20,6 @@ public class HelloController {
     @GetMapping("/hello_auth_app")
     @PreAuthorize("hasAnyRole('ROLE_APPLICANT')")
     public String hello_auth_applicant(){
-//        System.out.println(new Boat("someboat", 4, 2));
         return """
         <html>
             <body>
@@ -33,7 +31,7 @@ public class HelloController {
     }
     @PostMapping("/hello_auth_app")
     @PreAuthorize("hasAnyRole('ROLE_APPLICANT')")
-    public void hello_auth_applicant_post(@RequestBody Boat boat){
+    public void hello_auth_applicant_post(@RequestBody BoatForPostBody boat){
         System.out.println("Posted boat: " + boat);
     }
 

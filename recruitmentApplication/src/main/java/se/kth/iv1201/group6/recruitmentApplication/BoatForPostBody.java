@@ -1,10 +1,10 @@
 package se.kth.iv1201.group6.recruitmentApplication;
 
-public class Boat {
+public class BoatForPostBody {
 
     private String name;
 
-    public Boat(String name, int len, int width) {
+    public BoatForPostBody(String name, int len, int width) {
         this.name = name;
         this.len = len;
         this.width = width;

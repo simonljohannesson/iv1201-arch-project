@@ -17,6 +17,5 @@ public class MyUserDetailService implements UserDetailsService {
         var user = userRepository.findByUsername(username);
         if(user.isEmpty()) throw new UsernameNotFoundException("Could not find user " + username);
         return new ApplicationUserDetails(user.get());
-
     }
 }
