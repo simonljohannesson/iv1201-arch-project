@@ -1,35 +1,41 @@
 package se.kth.iv1201.group6.recruitmentApplication.auth;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public class ApplicationUser implements UserDetails {
+public class ApplicationUserDetails implements UserDetails {
+
     final private String username;
     final private String password;
-    final private boolean isAccountNonExpired;
-    final private boolean isAccountNonLocked;
-    final private boolean isCredentialsNonExpired;
+    final private boolean isAccountNonExpired = true;
+    final private boolean isAccountNonLocked = true;
+    final private boolean isCredentialsNonExpired = true;
     final private boolean isEnabled;
-    private Set<? extends GrantedAuthority> authorities;
+    private Collection<? extends GrantedAuthority> authorities;
 
-    public ApplicationUser(
+    public ApplicationUserDetails(User user){
+        username = user.getUsername();
+        password = user.getPassword();
+        isEnabled = user.isEnabled();
+        authorities = Arrays.stream(user.getRoles().split(","))
+                        .map((String role) -> new SimpleGrantedAuthority(role))
+                        .collect(Collectors.toList());
+    }
+
+    public ApplicationUserDetails(
             String username,
             String password,
-            boolean accountNonExpired,
-            boolean accountNonLocked,
-            boolean credentialsNonExpired,
             boolean enabled,
             Set<? extends GrantedAuthority> authorities
     ) {
+//        this.id = id;
         this.username = username;
         this.password = password;
-        this.isAccountNonExpired = accountNonExpired;
-        this.isAccountNonLocked = accountNonLocked;
-        this.isCredentialsNonExpired = credentialsNonExpired;
         this.isEnabled = enabled;
         this.authorities = authorities;
     }
@@ -68,4 +74,6 @@ public class ApplicationUser implements UserDetails {
     public boolean isEnabled() {
         return this.isEnabled;
     }
+
+
 }

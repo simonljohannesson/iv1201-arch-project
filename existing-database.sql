@@ -48,6 +48,25 @@ ALTER TABLE public.availability ALTER COLUMN availability_id ADD GENERATED ALWAY
 );
 
 
+CREATE TABLE public.users (  
+    id bigint unique not null,
+	username character varying(50) primary key,
+	password character varying(500) not null,
+	enabled boolean not null,
+    roles character varying(500) 
+);
+
+
+
+COPY public.users (id, username, password, enabled, roles) FROM stdin;
+1	applicant	password	true	ROLE_APPLICANT
+2	recruiter	password	true	ROLE_RECRUITER
+\.
+
+ALTER TABLE public.users OWNER TO postgres;
+
+
+
 --
 -- Name: competence; Type: TABLE; Schema: public; Owner: postgres
 --

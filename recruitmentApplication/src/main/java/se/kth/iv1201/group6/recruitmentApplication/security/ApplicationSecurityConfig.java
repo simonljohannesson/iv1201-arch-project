@@ -11,7 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import se.kth.iv1201.group6.recruitmentApplication.auth.ApplicationUserService;
+import se.kth.iv1201.group6.recruitmentApplication.auth.MyUserDetailService;
+
 
 @Configuration
 @EnableWebSecurity
@@ -20,23 +21,26 @@ import se.kth.iv1201.group6.recruitmentApplication.auth.ApplicationUserService;
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final ApplicationUserService applicationUserService;
+
+//    @Autowired
+//    MyUserDetailService myUserDetailService;
+
+    @Autowired
+    MyUserDetailService userDetailsService;
 
     @Autowired
     public ApplicationSecurityConfig(
-            PasswordEncoder passwordEncoder,
-            ApplicationUserService applicationUserService) {
+            PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
-        this.applicationUserService = applicationUserService;
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception { // authorization
         http
                 .csrf().disable()
 //                .cors().disable()
                 .authorizeRequests()
-                    .antMatchers("/hello", "/index.html").permitAll()
+                    .antMatchers("/hello", "/index.html", "/persons/**").permitAll()
 //                    .antMatchers("/hello_auth_rec").hasRole(ApplicationUserRole.RECRUITER.name())
 //                    .antMatchers("/hello_auth_app").hasRole(ApplicationUserRole.APPLICANT.name())
                     .anyRequest().authenticated()
@@ -68,16 +72,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception { // authentication
+//        auth.authenticationProvider(daoAuthenticationProvider());
+        auth.userDetailsService(userDetailsService);
     }
 
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(applicationUserService);
-        return provider;
-    }
+//    @Bean
+//    public DaoAuthenticationProvider daoAuthenticationProvider(){
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//        provider.setPasswordEncoder(passwordEncoder);
+//        provider.setUserDetailsService(applicationUserService);
+//        return provider;
+//    }
 
 }

@@ -21,7 +21,7 @@ public class HelloController {
     @GetMapping("/hello_auth_app")
     @PreAuthorize("hasAnyRole('ROLE_APPLICANT')")
     public String hello_auth_applicant(){
-        System.out.println(new Boat("someboat", 4, 2));
+//        System.out.println(new Boat("someboat", 4, 2));
         return """
         <html>
             <body>
