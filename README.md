@@ -74,5 +74,5 @@ The team wanted to create the backend using microservices but considering the ad
 It is simple and similar to how the team has worked in the passed, and it allows the team to keep all information in the same place (github).
 
 
-## 2022-02-10 Controller endpoints should only expose DTOs not DAOs. And DTOs containing critical security information should be explicitly named for their purpose.
+### 2022-02-10 Controller endpoints should only expose DTOs not DAOs. And DTOs containing critical security information should be explicitly named for their purpose.
 For example when creating a user the dto could be named UserCreateDTO
