@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import se.kth.iv1201.group6.recruitmentApplication.model.person.Person;
+import se.kth.iv1201.group6.recruitmentApplication.model.Person;
 import se.kth.iv1201.group6.recruitmentApplication.service.PersonService;
 
 @Controller

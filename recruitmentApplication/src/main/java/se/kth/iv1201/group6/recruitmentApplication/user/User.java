@@ -1,4 +1,4 @@
-package se.kth.iv1201.group6.recruitmentApplication.model.person;
+package se.kth.iv1201.group6.recruitmentApplication.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,23 +6,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "person")
-public class Person {
+public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "person_id")
     private Long id;
     
+    @NotBlank(message = "Name is mandatory")
     private String name;
-    @Column(name = "surname") // name in database
-    private String last_name;
+    @NotBlank(message = "Surname is mandatory")
+    private String surname;
     private String pnr;
+    @NotBlank(message = "Email is mandatory")
     private String email;
     private String password;
-    private Long role_id;
+    @Column(name = "role_id")
+    private Long roleId;
     private String username;
 
     public Long getId() {
@@ -41,12 +45,12 @@ public class Person {
         this.name = name;
     }
     
-    public String getLast_name() {
-        return this.last_name;
+    public String getSurname() {
+        return this.surname;
     }
     
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
     
     public String getPnr() {
@@ -73,12 +77,12 @@ public class Person {
         this.password = password;
     }
     
-    public Long getRole_id() {
-        return this.role_id;
+    public Long getRoleId() {
+        return this.roleId;
     }
     
-    public void setRole_id(Long role_id) {
-        this.role_id = role_id;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
     
     public String getUsername() {
