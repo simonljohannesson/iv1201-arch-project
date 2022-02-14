@@ -80,8 +80,11 @@ It is simple and similar to how the team has worked in the passed, and it allows
 For example when creating a user the dto could be named UserCreateDTO
 
 
-### 2022-02-10 Vue decisions here 
-
+### 2022-02-10 Vue dependencies
+* Eslint with standard configuration, this will enable us to conform to a coding style without having to worry about it when we write code. This can be further configured to add more rules as we see necessary. Will be setup so linting is done on save, no risk of forgetting to lint project before commits.
+* Babel, will allow us to write the lates JS which then compiles down to a target version of JS. Enabling more support without having to think about JS compability when writing code.
+* Bootstrap see earlier decision.
+* Jest, testing library that comes package with Vue during setup hence works good with Vue. 
 
 ### 2022-02-14 RestAPI naming convention should follow this [guide](https://restfulapi.net/resource-naming/).
 
