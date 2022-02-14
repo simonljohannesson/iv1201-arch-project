@@ -2,6 +2,8 @@
 
 This is a project in the course iv1201 at kth.
 
+## [Backlog](https://github.com/simonljohannesson/iv1201-arch-project/projects/1)
+
 ## Decision log
 
 ### 2022-01-26 Github should be used
