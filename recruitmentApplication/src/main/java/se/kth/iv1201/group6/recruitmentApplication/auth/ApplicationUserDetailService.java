@@ -29,12 +29,12 @@ public class ApplicationUserDetailService implements UserDetailsService {
      * @param user user to be updated
      * @param newPassword the new password
      * @return The user in the database
-     * @throws NoSuchElementException
-     * @throws IllegalArgumentException
+     * @throws NoSuchElementException if user cannot be resolved
+     * @throws IllegalArgumentException if bad argument
      */
     public UserDetails updatePassword(UserDetails user, String newPassword) {
-        if(!(user instanceof ApplicationUserDetails)) throw new IllegalArgumentException("Could not resolve type.");
-        ApplicationUserDetails applicationUserDetails = (ApplicationUserDetails)user;
+        if(!(user instanceof ApplicationUserDetails applicationUserDetails))
+            throw new IllegalArgumentException("Could not resolve type.");
 
         var updateUser = userRepository.findById(applicationUserDetails.getId()).orElseThrow();
 
@@ -43,5 +43,4 @@ public class ApplicationUserDetailService implements UserDetailsService {
 
         return new ApplicationUserDetails(updateUser);
     }
-
 }
