@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import se.kth.iv1201.group6.recruitmentApplication.model.person.Person;
 
+
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long> {
 

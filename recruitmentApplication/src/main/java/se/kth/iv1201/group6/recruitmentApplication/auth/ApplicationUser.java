@@ -2,22 +2,28 @@ package se.kth.iv1201.group6.recruitmentApplication.auth;
 
 import javax.persistence.*;
 
+/**
+ * This class is fetched from the database when Spring-Security needs to verify a user.
+ *
+ * The class is not an accurate description of the relation in the database, it holds
+ * only what it needs for Spring-Security authentication and authorization to work.
+ */
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "person")
+public class ApplicationUser {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "person_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
-    @Column(name = "enabled")
-    private boolean enabled;
-    @Column(name = "roles")
-    private String roles;
+//    @Column(name = "enabled") // TODO: fix database person to hold isUserEnabled
+//    private boolean enabled;
+    @Column(name = "role_id")
+    private int role;
 
     public long getId() {
         return id;
@@ -44,19 +50,19 @@ public class User {
     }
 
     public boolean isEnabled() {
-        return enabled;
+        return true;
     }
 
     public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+//        this.enabled = enabled;
     }
 
-    public String getRoles() {
-        return roles;
+    public int getRole() {
+        return role;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRoles(int role) {
+        this.role = role;
     }
 
 

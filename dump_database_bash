@@ -1,0 +1,2 @@
+#! bin/bash
+docker exec -t recruitmentDB pg_dumpall -c -U postgres > dump_2022-02-14_18_09_07.sql
