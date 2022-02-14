@@ -85,4 +85,9 @@ For example when creating a user the dto could be named UserCreateDTO
 
 ### 2022-02-14 RestAPI naming convention should follow this [guide](https://restfulapi.net/resource-naming/).
 
+### 2022-02-14 Keep `/applicants` and `/recruiters` endpoints under `/users` endpoint
+To enforce coherence and for future functionality changes, keep all user related endpoints under `/users` endpoint.
+
+### 2022-02-14 Add table for application status
+To keep track of an applications status, add a table in the database. 
 
