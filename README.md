@@ -78,3 +78,11 @@ It is simple and similar to how the team has worked in the passed, and it allows
 
 ### 2022-02-10 Controller endpoints should only expose DTOs not DAOs. And DTOs containing critical security information should be explicitly named for their purpose.
 For example when creating a user the dto could be named UserCreateDTO
+
+
+### 2022-02-10 Vue decisions here 
+
+
+### 2022-02-14 RestAPI naming convention should follow this [guide](https://restfulapi.net/resource-naming/).
+
+
