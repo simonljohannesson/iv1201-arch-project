@@ -86,6 +86,9 @@ For example when creating a user the dto could be named UserCreateDTO
 * Bootstrap see earlier decision.
 * Jest, testing library that comes package with Vue during setup hence works good with Vue. 
 
+### 2022-02-10 Vue project structuring
+Conforming to Vue project structuring help both new developers starting on the project and keep a good seperation in the code.  
+
 ### 2022-02-14 RestAPI naming convention should follow this [guide](https://restfulapi.net/resource-naming/).
 
 ### 2022-02-14 Keep `/applicants` and `/recruiters` endpoints under `/users` endpoint
