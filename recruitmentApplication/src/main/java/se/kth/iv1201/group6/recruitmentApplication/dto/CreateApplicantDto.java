@@ -1,6 +1,6 @@
 package se.kth.iv1201.group6.recruitmentApplication.dto;
 
-import se.kth.iv1201.group6.recruitmentApplication.filter.PersonNumberValidation;
+import se.kth.iv1201.group6.recruitmentApplication.annotation.PersonNumberValidation;
 
 import javax.validation.constraints.*;
 

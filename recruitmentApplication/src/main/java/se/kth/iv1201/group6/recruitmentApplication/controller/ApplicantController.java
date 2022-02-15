@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CreateApplicantDto;
-import se.kth.iv1201.group6.recruitmentApplication.service.ApplicantConflictException;
+import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
 import se.kth.iv1201.group6.recruitmentApplication.service.ApplicantService;
 
 import javax.validation.Valid;

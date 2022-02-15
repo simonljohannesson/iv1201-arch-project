@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import se.kth.iv1201.group6.recruitmentApplication.dao.CreateApplicantDao;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CreateApplicantDto;
 import se.kth.iv1201.group6.recruitmentApplication.enums.ReasonEnum;
+import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
 import se.kth.iv1201.group6.recruitmentApplication.repository.ApplicantRepository;
 
 import javax.transaction.Transactional;

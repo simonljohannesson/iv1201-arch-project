@@ -35,6 +35,7 @@ public class PasswordConfig {
 
         // password without an {id} prefix will be handled by default encoder
         passwordEncoder.setDefaultPasswordEncoderForMatches(defaultEncoder);
+
         return passwordEncoder;
 
     }

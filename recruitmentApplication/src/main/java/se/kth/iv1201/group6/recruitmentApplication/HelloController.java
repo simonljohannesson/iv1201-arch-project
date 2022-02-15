@@ -29,12 +29,6 @@ public class HelloController {
         </html>
         """;
     }
-    @PostMapping("/hello_auth_app")
-    @PreAuthorize("hasAnyRole('ROLE_APPLICANT')")
-    public void hello_auth_applicant_post(@RequestBody BoatForPostBody boat){
-        System.out.println("Posted boat: " + boat);
-    }
-
 
     @GetMapping("/hello_auth_rec")
     @PreAuthorize("hasAnyRole('ROLE_RECRUITER')")

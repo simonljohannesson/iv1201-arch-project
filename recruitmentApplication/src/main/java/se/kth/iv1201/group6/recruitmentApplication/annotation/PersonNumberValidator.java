@@ -1,4 +1,4 @@
-package se.kth.iv1201.group6.recruitmentApplication.filter;
+package se.kth.iv1201.group6.recruitmentApplication.annotation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

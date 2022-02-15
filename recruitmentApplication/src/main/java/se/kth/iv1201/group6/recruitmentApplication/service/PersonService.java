@@ -1,12 +1,11 @@
 package se.kth.iv1201.group6.recruitmentApplication.service;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import se.kth.iv1201.group6.recruitmentApplication.model.person.Person;
+import se.kth.iv1201.group6.recruitmentApplication.model.Person;
 import se.kth.iv1201.group6.recruitmentApplication.repository.PersonRepository;
 
 @Service
