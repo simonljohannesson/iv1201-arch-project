@@ -1,4 +1,4 @@
-package se.kth.iv1201.group6.recruitmentApplication.model.person;
+package se.kth.iv1201.group6.recruitmentApplication.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
