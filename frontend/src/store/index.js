@@ -14,11 +14,15 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async getApplicants (state, page, size) {
-            const applicants = await applicantDB.get(page, size);
-            console.log(applicants);
-            state.commit('setApplicants', applicants);
-            return applicants;
+        async getApplicants (state, { page, size }) {
+            try {
+                const auth = Buffer.from(process.env.VUE_APP_DEBUG_USER + ':' + process.env.VUE_APP_DEBUG_PASSWORD).toString('base64');
+                const applicants = await applicantDB.get(page, size, auth);
+                state.commit('setApplicants', applicants);
+                return applicants;
+            } catch (error) {
+                return error;
+            }
         }
     },
     modules: {
