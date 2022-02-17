@@ -15,7 +15,6 @@ import se.kth.iv1201.group6.recruitmentApplication.service.ApplicantService;
 
 import javax.validation.Valid;
 
-
 @Controller
 @ResponseBody
 @RequestMapping("users/applicants")
@@ -30,8 +29,8 @@ public class ApplicantController {
      * @param size size of page, defaults to 10
      * @return A page with users and paging info
      */
-    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping
+    @CrossOrigin
     public Page<Applicant> getApplicants(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         Pageable paging = PageRequest.of(page, size);
         return applicantService.findAll(paging);
