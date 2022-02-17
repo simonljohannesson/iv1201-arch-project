@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-
 /**
  * Sends request to given parameters
  * @param {String} url api endpoint
@@ -24,12 +23,16 @@ const applicants = {
      * Gets applicants from the database
      * @returns array with applicants
      */
-    get: async (page, size) => {
+    get: async (page, size, auth) => {
         let url = process.env.VUE_APP_REST_SERVER_ADRESS + 'users/applicants?';
         if (page) url += 'page=' + page;
-        if (size) url += 'size=' + size;
+        if (size) url += '&size=' + size;
+        const header = new Headers();
+        header.set('Authorization', 'Basic ' + auth);
         const options = {
-            method: 'GET'
+            method: 'GET',
+            headers: header
+
         };
 
         return await sendRequest(url, options);
