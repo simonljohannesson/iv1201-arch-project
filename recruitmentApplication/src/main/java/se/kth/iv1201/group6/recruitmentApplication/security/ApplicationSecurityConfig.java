@@ -28,7 +28,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception { // authorization
         http
-                .csrf().disable()               //disable csrf protection
+                .cors().and().csrf().disable()               //disable csrf protection
                 .authorizeRequests()            // verify all requests
                     .antMatchers("/index.html").permitAll() // allow anyone to access '/index.html'
                     .antMatchers(HttpMethod.POST, "/users/applicants").anonymous()
