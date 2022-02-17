@@ -48,6 +48,8 @@ ALTER TABLE public.availability ALTER COLUMN availability_id ADD GENERATED ALWAY
 );
 
 
+
+
 --
 -- Name: competence; Type: TABLE; Schema: public; Owner: postgres
 --
@@ -5322,8 +5324,15 @@ COPY public.person (person_id, name, surname, pnr, email, password, role_id, use
 1008	Simone	Whitehead	20060718-2363	simone.whitehead@finnsinte.se	\N	2	\N
 1009	Orla	Meadows	20040416-3432	orla.meadows5655@finnsinte.se	\N	2	\N
 1010	Kenyon	Solis	20070918-7181	s.kenyon@finnsinte.se	\N	2	\N
+1011	Rec	Ruiter	19820101-0101	rec@ruiter.com	password	1	recruiter
+1012	App	Licant	20050101-0101	app@licant.com	password	2	applicant
 \.
 
+-- COPY public.person (person_id, name, surname, pnr, email, password, role_id, username) FROM stdin;
+
+-- update person
+-- set password = concat('{noop}', password)
+-- where password is not null and password != '{noop}password';    
 
 --
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
