@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CreateApplicantDto;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
-import se.kth.iv1201.group6.recruitmentApplication.model.applicant.Applicant;
+import se.kth.iv1201.group6.recruitmentApplication.model.Applicant;
 import se.kth.iv1201.group6.recruitmentApplication.service.ApplicantService;
 
 import javax.validation.Valid;
@@ -24,6 +24,12 @@ public class ApplicantController {
     @Autowired
     private ApplicantService applicantService;
 
+    /**
+     * Get applicants paged
+     * @param page page-number wanted, defaults to page 0
+     * @param size size of page, defaults to 10
+     * @return A page with users and paging info
+     */
     @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping
     public Page<Applicant> getApplicants(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {

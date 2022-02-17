@@ -1,10 +1,10 @@
-package se.kth.iv1201.group6.recruitmentApplication.model.applicant;
+package se.kth.iv1201.group6.recruitmentApplication.model;
 
 
 import javax.persistence.*;
 
 /**
- * @author Victor Pettersson last changed 2022-02-14
+ * Represents an applicant in the database without sensitive data
  */
 @Entity
 @Table(name = "person")

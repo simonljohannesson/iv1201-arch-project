@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import se.kth.iv1201.group6.recruitmentApplication.model.applicant.Applicant;
+import se.kth.iv1201.group6.recruitmentApplication.model.Applicant;
 
 /**
  * @author Victor Pettersson last changed 2022-02-17

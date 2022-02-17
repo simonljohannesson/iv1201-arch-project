@@ -9,7 +9,7 @@ import se.kth.iv1201.group6.recruitmentApplication.dao.CreateApplicantDao;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CreateApplicantDto;
 import se.kth.iv1201.group6.recruitmentApplication.enums.ReasonEnum;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
-import se.kth.iv1201.group6.recruitmentApplication.model.applicant.Applicant;
+import se.kth.iv1201.group6.recruitmentApplication.model.Applicant;
 import se.kth.iv1201.group6.recruitmentApplication.repository.ApplicantRepository;
 import se.kth.iv1201.group6.recruitmentApplication.repository.CreateApplicantRepository;
 
@@ -30,6 +30,11 @@ public class ApplicantService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    /**
+     * Finds all applicants on specified page
+     * @param page Pageable object
+     * @return A page object containing applicants
+     */
     public Page<Applicant> findAll(Pageable page){
         return applicantRepository.findAllApplicants(page);
     }
