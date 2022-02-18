@@ -3,6 +3,7 @@ package se.kth.iv1201.group6.recruitmentApplication.security;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import se.kth.iv1201.group6.recruitmentApplication.filter.ErrorAttributesFilter;
 
 @Configuration
 public class RecruitmentErrorConfiguration {
@@ -11,6 +12,6 @@ public class RecruitmentErrorConfiguration {
      */
     @Bean
     public ErrorAttributes errorAttributes(){
-        return new RecruitmentErrorAttributes();
+        return new ErrorAttributesFilter();
     }
 }

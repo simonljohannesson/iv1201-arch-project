@@ -47,5 +47,4 @@ public class ApplicantService {
             throw new InternalError("An error occured.");
         }
     }
-
 }
