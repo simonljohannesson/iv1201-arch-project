@@ -1,14 +1,17 @@
 package se.kth.iv1201.group6.recruitmentApplication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import se.kth.iv1201.group6.recruitmentApplication.dao.CreateApplicantDao;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CreateApplicantDto;
 import se.kth.iv1201.group6.recruitmentApplication.enums.ReasonEnum;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
+import se.kth.iv1201.group6.recruitmentApplication.model.Applicant;
 import se.kth.iv1201.group6.recruitmentApplication.repository.ApplicantRepository;
+import se.kth.iv1201.group6.recruitmentApplication.repository.CreateApplicantRepository;
 
 import javax.transaction.Transactional;
 
@@ -19,10 +22,22 @@ import javax.transaction.Transactional;
 public class ApplicantService {
 
     @Autowired
-    ApplicantRepository applicantRepository;
+    private CreateApplicantRepository createApplicantRepository;
+
+    @Autowired
+    private ApplicantRepository applicantRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    /**
+     * Finds all applicants on specified page
+     * @param page Pageable object
+     * @return A page object containing applicants
+     */
+    public Page<Applicant> findAll(Pageable page){
+        return applicantRepository.findAllApplicants(page);
+    }
 
     /**
      * Create a new applicant.
@@ -32,12 +47,12 @@ public class ApplicantService {
     @Transactional
     public void createApplicant(CreateApplicantDto applicant) throws ApplicantConflictException {
         var users
-                = applicantRepository.findByUniqueFields(applicant.username, applicant.pnr, applicant.email).get();
+                = createApplicantRepository.findByUniqueFields(applicant.username, applicant.pnr, applicant.email).get();
 
         if(users.isEmpty()){
             var usr = new CreateApplicantDao(applicant);
             usr.password = passwordEncoder.encode(usr.password);
-            applicantRepository.save(usr);
+            createApplicantRepository.save(usr);
         } else {
             for(var user : users){
                 if(user.email.equals(applicant.email))          throw new ApplicantConflictException(ReasonEnum.DUPLICATE_EMAIL, "Email already in use");

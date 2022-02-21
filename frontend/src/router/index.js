@@ -1,14 +1,20 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import First from '../views/First.vue';
+import Home from '../views/Home.vue';
+import Applicant from '../views/Applicant.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: '/',
-        name: 'First',
-        component: First
+        name: 'Home',
+        component: Home
+    },
+    {
+        path: '/applicants',
+        name: 'Applicant',
+        component: Applicant
     }
     // {
     //     path: '/about',
