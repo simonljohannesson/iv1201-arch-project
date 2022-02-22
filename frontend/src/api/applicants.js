@@ -1,41 +1,22 @@
-const fetch = require('node-fetch');
-/**
- * Sends request to given parameters
- * @param {String} url api endpoint
- * @param {Object} options with options
- * @returns json object if succeful
- */
-async function sendRequest (url, options) {
-    try {
-        const res = await fetch(url, options);
-        if (res.ok) {
-            return await res.json();
-        } else {
-            throw new Error(res.statusText);
-        }
-    } catch (error) {
-        throw new Error(error);
-    }
-}
+import { sendRequest } from './baseRequest';
 
 const applicants = {
     /**
-     * Gets applicants from the database
-     * @returns array with applicants
+     * Gets applicants
+     * @param {Number} page pagenumber to be loaded, can be omitted
+     * @param {Number} size how many applicants that should be loaded in, can be omitted
+     * @returns an object container applicants and paging info
      */
-    get: async (page, size, auth) => {
-        let url = process.env.VUE_APP_REST_SERVER_ADRESS + 'users/applicants?';
+    get: async (page, size) => {
+        let url = 'users/applicants?';
         if (page) url += 'page=' + page;
         if (size) url += '&size=' + size;
-        const header = new Headers();
-        header.set('Authorization', 'Basic ' + auth);
-        const options = {
-            method: 'GET',
-            headers: header
-
-        };
-
-        return await sendRequest(url, options);
+        try {
+            const res = await sendRequest('get', url);
+            return res.data;
+        } catch (error) {
+            return error.response.status;
+        }
     }
 };
 
