@@ -39,7 +39,6 @@ export default {
         }
     },
     async created () {
-        console.log('hejekgergerj');
         await this.checkAuth();
     },
     computed: mapState(['authenticated'])
