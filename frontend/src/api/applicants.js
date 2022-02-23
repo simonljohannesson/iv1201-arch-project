@@ -30,6 +30,18 @@ const applicants = {
             data: applicantData
         };
         return await sendRequest(requestConfig);
+    },
+    getApplication: async (applicantId) => {
+        try {
+            const requestConfig = {
+                method: 'GET',
+                url: `/users/applicants/${applicantId}/data`
+            };
+            const res = await sendRequest(requestConfig);
+            return res.data;
+        } catch (error) {
+            return error.response.status;
+        }
     }
 };
 

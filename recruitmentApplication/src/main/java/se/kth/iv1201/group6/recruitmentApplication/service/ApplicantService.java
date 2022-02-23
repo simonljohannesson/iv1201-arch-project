@@ -6,11 +6,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.kth.iv1201.group6.recruitmentApplication.dao.CreateApplicantDao;
+import se.kth.iv1201.group6.recruitmentApplication.dto.ApplicantDataDto;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CreateApplicantDto;
 import se.kth.iv1201.group6.recruitmentApplication.enums.ReasonEnum;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
 import se.kth.iv1201.group6.recruitmentApplication.model.Applicant;
 import se.kth.iv1201.group6.recruitmentApplication.repository.ApplicantRepository;
+import se.kth.iv1201.group6.recruitmentApplication.repository.AvailabilityRepository;
+import se.kth.iv1201.group6.recruitmentApplication.repository.CompetenceRepository;
 import se.kth.iv1201.group6.recruitmentApplication.repository.CreateApplicantRepository;
 
 import javax.transaction.Transactional;
@@ -26,6 +29,12 @@ public class ApplicantService {
 
     @Autowired
     private ApplicantRepository applicantRepository;
+
+    @Autowired
+    private AvailabilityRepository availabilityRepository;
+
+    @Autowired
+    private CompetenceRepository competenceRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -61,5 +70,12 @@ public class ApplicantService {
             }
             throw new InternalError("An error occured.");
         }
+    }
+
+    public ApplicantDataDto getApplicantData(Long applicantId) {
+        var availability = availabilityRepository.findAvailability(applicantId);
+        var competence = competenceRepository.findCompetence(applicantId);
+        
+        return new ApplicantDataDto(availability, competence);
     }
 }
