@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { applicants as applicantDB } from '../api/applicants';
+import { applicants as applicantApi } from '../api/applicants';
 import { auth } from '../api/authenticate';
 import router from '../router';
 
@@ -27,7 +27,7 @@ export default new Vuex.Store({
          * @returns list of applicants with pagination data, if not authenticated it redirects
          */
         async getApplicants (state, { page, size }) {
-            const applicants = await applicantDB.get(page, size);
+            const applicants = await applicantApi.get(page, size);
             state.commit('setApplicants', applicants);
 
             if (applicants !== 401) {
@@ -57,6 +57,14 @@ export default new Vuex.Store({
             const status = await auth.isAuthenticated();
             state.commit('setAuthenticated', status);
             return status;
+        },
+        /**
+         * Create a new applicant
+         * @param {*} applicantData the data required to create applicant
+         * @returns http response
+         */
+        async createApplicant (_state, applicantData) {
+            return applicantApi.create(applicantData);
         }
     },
     getters: {

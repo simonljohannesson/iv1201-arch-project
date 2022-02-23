@@ -12,11 +12,24 @@ const applicants = {
         if (page) url += 'page=' + page;
         if (size) url += '&size=' + size;
         try {
-            const res = await sendRequest('get', url);
+            const requestConfig = {
+                method: 'GET',
+                url: url
+            };
+
+            const res = await sendRequest(requestConfig);
             return res.data;
         } catch (error) {
             return error.response.status;
         }
+    },
+    create: async (applicantData) => {
+        const requestConfig = {
+            method: 'POST',
+            url: '/users/applicants',
+            data: applicantData
+        };
+        return await sendRequest(requestConfig);
     }
 };
 
