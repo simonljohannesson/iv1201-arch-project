@@ -14,7 +14,10 @@ axios.defaults.withCredentials = true;
 export async function sendRequest (method, endpoint, username, password) {
     const config = {
         method: method,
-        url: endpoint
+        url: endpoint,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
     };
     if (username && password) {
         config.auth = {
