@@ -16,6 +16,7 @@ public class PersonNumberValidator implements ConstraintValidator<PersonNumberVa
      * @return
      */
     private boolean personalNumberValidation(String pnr) {
+         if(pnr == null) return false;
          if(pnr.length() != 12) return false;
          int digits = pnr.length();
          int sum = 0;

@@ -7,7 +7,12 @@ const auth = {
      */
     isAuthenticated: async () => {
         try {
-            const response = await sendRequest('get', '/user');
+            const requestConfig = {
+                method: 'GET',
+                url: '/user'
+            };
+
+            const response = await sendRequest(requestConfig);
             return response.data.authenticated;
         } catch (error) {
             if (error.response.status === 401) {
@@ -25,7 +30,16 @@ const auth = {
      */
     login: async (user, pass) => {
         try {
-            const response = await sendRequest('get', '/user', user, pass);
+            const requestConfig = {
+                method: 'GET',
+                url: '/user',
+                auth: {
+                    username: user,
+                    password: pass
+                }
+            };
+
+            const response = await sendRequest(requestConfig);
             return response.data.authenticated;
         } catch (error) {
             if (error.response.status === 401) {
