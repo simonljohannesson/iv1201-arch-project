@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapActions } from 'vuex';
 
 export default {
     data () {
@@ -144,58 +144,56 @@ export default {
         };
     },
     methods: {
-        rerouteToHome () {
-            this.$router.push({ name: 'Home' });
+        ...mapActions(['createApplicant']),
+        reroute () {
+            this.$router.push({ name: 'Login' });
         },
-        onSubmit (event) {
+        async onSubmit (event) {
             event.preventDefault();
-            axios({
-                method: 'POST',
-                url: 'http://localhost:8080/users/applicants',
-                data: {
+
+            try {
+                const applicantData = {
                     email: this.form.email,
                     name: this.form.name,
                     surname: this.form.surname,
                     pnr: this.form.pnr,
                     username: this.form.username,
                     password: this.form.password
-                },
-                withCredentials: true
-            })
-                .then((_res) => {
-                    this.createdAccount = true;
-                    setTimeout(() => this.rerouteToHome(), 3000);
-                })
-                .catch((err) => {
-                    if (err.response.status === 400) {
-                        this.dismissibleAlertData = [];
-                        const errors = err.response.data.errors.map((error) => {
-                            return this.mapping[error.field] + ': ' + error.defaultMessage;
-                        });
-                        this.dismissibleAlertData = errors;
-                        this.showDismissibleAlert = true;
-                    } else if (err.response.status === 409) {
-                        this.dismissibleAlertData = [];
-                        let errorMsg = '';
-                        switch (err.response.data.errorCode) {
-                        case 100:
-                            errorMsg = 'Email already in use';
-                            break;
-                        case 101:
-                            errorMsg = 'Username already in use';
-                            break;
-                        case 102:
-                            errorMsg = 'Personal number already in use';
-                            break;
-                        default:
-                            errorMsg =
+                };
+
+                await this.createApplicant(applicantData);
+                this.createdAccount = true;
+                setTimeout(() => this.reroute(), 3000);
+            } catch (err) {
+                if (err.response.status === 400) {
+                    this.dismissibleAlertData = [];
+                    const errors = err.response.data.errors.map((error) => {
+                        return this.mapping[error.field] + ': ' + error.defaultMessage;
+                    });
+                    this.dismissibleAlertData = errors;
+                    this.showDismissibleAlert = true;
+                } else if (err.response.status === 409) {
+                    this.dismissibleAlertData = [];
+                    let errorMsg = '';
+                    switch (err.response.data.errorCode) {
+                    case 100:
+                        errorMsg = 'Email already in use';
+                        break;
+                    case 101:
+                        errorMsg = 'Username already in use';
+                        break;
+                    case 102:
+                        errorMsg = 'Personal number already in use';
+                        break;
+                    default:
+                        errorMsg =
                   'An error occured, if it persists please contact the site administrator.';
-                            break;
-                        }
-                        this.dismissibleAlertData.push(errorMsg);
-                        this.showDismissibleAlert = true;
+                        break;
                     }
-                });
+                    this.dismissibleAlertData.push(errorMsg);
+                    this.showDismissibleAlert = true;
+                }
+            }
         }
     },
     computed: {
