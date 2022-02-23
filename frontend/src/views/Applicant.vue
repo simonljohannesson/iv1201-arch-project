@@ -1,10 +1,11 @@
 <template>
-    <div class="container justify-content-center">
+    <div class="container">
         <div class="row">
             <applicant-table/>
         </div>
     </div>
 </template>
+
 <script>
 import ApplicantTable from '../components/ApplicantTable.vue';
 export default {
@@ -12,6 +13,7 @@ export default {
     components: { ApplicantTable }
 };
 </script>
+
 <style lang="">
 
 </style>
