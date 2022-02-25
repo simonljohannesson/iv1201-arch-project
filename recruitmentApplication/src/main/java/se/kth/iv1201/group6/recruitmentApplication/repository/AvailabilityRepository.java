@@ -11,6 +11,7 @@ import se.kth.iv1201.group6.recruitmentApplication.dao.AvailabilityDao;
 
 @Repository
 public interface AvailabilityRepository extends CrudRepository<AvailabilityDao, Long>{
-    @Query("SELECT a FROM CompetenceProfileDao a LEFT JOIN a.competence c WHERE a.applicantId = :applicantId AND a.competenceId = c.id")
-    Collection<AvailabilityDao> findAvailability(@Long applicantId);
+    // @Query("SELECT a FROM CompetenceProfileDao a LEFT JOIN a.competence c WHERE a.applicantId = :applicantId AND a.competenceId = c.id")
+    @Query("SELECT a FROM CompetenceProfileDao a")
+    Collection<AvailabilityDao> findAvailability(Long applicantId);
 }

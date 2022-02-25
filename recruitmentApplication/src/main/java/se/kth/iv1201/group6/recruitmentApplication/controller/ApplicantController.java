@@ -41,13 +41,13 @@ public class ApplicantController {
         return applicantService.findAll(paging);
     }
 
-    @CrossOrigin
-    @PreAuthorize("hasAnyRole('ROLE_RECRUITER')") // TODO should a user get its own data
-    @GetMapping("/{id}/data")
-    public ApplicantDataDto getApplicantData(@PathVariable(value = "id") Long applicantId) {
-        return applicantService.getApplicantData(applicantId);
-    }
-    
+    // @CrossOrigin
+    // @PreAuthorize("hasAnyRole('ROLE_RECRUITER')") // TODO should a user get its own data
+    // @GetMapping("/{id}/data")
+    // public ApplicantDataDto getApplicantData(@PathVariable(value = "id") Long applicantId) {
+    //     return applicantService.getApplicantData(applicantId);
+    // }
+
     /**
      * Create a new applicant.
      *

@@ -18,7 +18,7 @@ public class CompetenceProfileDao {
     @Column(name = "years_of_experience")
     public Double yearsOfExperience;
 
-    @OneToOne(mappedBy="id")
-    @JoinColumn(name = "competence_id")
-    private CompetenceDao competence;
+    // @OneToOne(mappedBy="id")
+    // @JoinColumn(name = "competence_id")
+    // private CompetenceDao competence;
 }

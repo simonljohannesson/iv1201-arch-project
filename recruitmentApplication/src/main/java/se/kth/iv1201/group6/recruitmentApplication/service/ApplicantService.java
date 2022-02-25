@@ -30,11 +30,11 @@ public class ApplicantService {
     @Autowired
     private ApplicantRepository applicantRepository;
 
-    @Autowired
-    private AvailabilityRepository availabilityRepository;
+    // @Autowired
+    // private AvailabilityRepository availabilityRepository;
 
-    @Autowired
-    private CompetenceRepository competenceRepository;
+    // @Autowired
+    // private CompetenceRepository competenceRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -72,10 +72,10 @@ public class ApplicantService {
         }
     }
 
-    public ApplicantDataDto getApplicantData(Long applicantId) {
-        var availability = availabilityRepository.findAvailability(applicantId);
-        var competence = competenceRepository.findCompetence(applicantId);
+    // public ApplicantDataDto getApplicantData(Long applicantId) {
+    //     var availability = availabilityRepository.findAvailability(applicantId);
+    //     var competence = competenceRepository.findCompetence(applicantId);
         
-        return new ApplicantDataDto(availability, competence);
-    }
+    //     return new ApplicantDataDto(availability, competence);
+    // }
 }
