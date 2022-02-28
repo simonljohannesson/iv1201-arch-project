@@ -97,3 +97,5 @@ To enforce coherence and for future functionality changes, keep all user related
 ### 2022-02-14 Add table for application status
 To keep track of an applications status, add a table in the database. 
 
+### 2022-02-28 Everything should be `@Transactional` and services should force transactions
+With some possible loss in performance we will instead prevent weird behaviour and bugs created by potential faulty database calls
