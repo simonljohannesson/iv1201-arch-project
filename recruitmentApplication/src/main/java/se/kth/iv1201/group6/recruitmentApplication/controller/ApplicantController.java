@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import se.kth.iv1201.group6.recruitmentApplication.dto.ApplicantDataDto;
@@ -41,12 +40,17 @@ public class ApplicantController {
         return applicantService.findAll(paging);
     }
 
-    // @CrossOrigin
-    // @PreAuthorize("hasAnyRole('ROLE_RECRUITER')") // TODO should a user get its own data
-    // @GetMapping("/{id}/data")
-    // public ApplicantDataDto getApplicantData(@PathVariable(value = "id") Long applicantId) {
-    //     return applicantService.getApplicantData(applicantId);
-    // }
+    /**
+     * Get an applicants application data
+     * @param applicantId The id of the applicant
+     * @return Availability and competences of applicant
+     */
+    @CrossOrigin
+    @PreAuthorize("hasAnyRole('ROLE_RECRUITER')") // TODO should a user get its own data?
+    @GetMapping("/{id}/data")
+    public ApplicantDataDto getApplicantData(@PathVariable(value = "id") Long applicantId) {
+        return applicantService.getApplicantData(applicantId);
+    }
 
     /**
      * Create a new applicant.

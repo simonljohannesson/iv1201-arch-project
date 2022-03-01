@@ -6,46 +6,28 @@
         <b-row>
             <b-container>
                 <b-row>
-                    <!-- <b-col> -->
-                        <b-table
-                            ref="applicantTable"
-                            striped
-                            hover
-                            :items="list"
-                            :busy="loading"
-                            :selectable="true"
-                            select-mode="single"
-                            @row-selected="onRowSelected"
-                        >
-                            <template #table-busy>
-                                <div v-if="!loadingError" class="text-center text-primary my-2">
-                                    <b-spinner class="align-middle"></b-spinner>
-                                    <strong>Loading...</strong>
-                                </div>
-                                <div v-else class="text-danger">
-                                    <b-icon icon="exclamation-circle-fill"></b-icon>
-                                    <strong>Something went wrong, try again by reloading</strong>
-                                </div>
-                            </template>
-                        </b-table>
-                    <!-- </b-col>
-                    <b-col> -->
-                        <b-modal id="applicant-modal"
-                            :title="`${viewApplicant.name} ${viewApplicant.lastName}`"
-                        >
-                            <b-container>Name: {{`${viewApplicant.name} ${viewApplicant.lastName}`}}</b-container>
-                            <b-container>Email: {{viewApplicant.email}}</b-container>
-                            <b-container>Person number: {{viewApplicant.pnr}}</b-container>
-                            <h3>Availability</h3>
-                            <b-table
-                                ref="availabilityTable"
-                                striped
-                                hover
-                                :items="availabilityList"
-                            >
-                            </b-table>
-                        </b-modal>
-                    <!-- </b-col> -->
+                    <b-table
+                        ref="applicantTable"
+                        striped
+                        hover
+                        :items="list"
+                        :busy="loading"
+                        :selectable="true"
+                        select-mode="single"
+                        @row-selected="onRowSelected"
+                    >
+                        <template #table-busy>
+                            <div v-if="!loadingError" class="text-center text-primary my-2">
+                                <b-spinner class="align-middle"></b-spinner>
+                                <strong>Loading...</strong>
+                            </div>
+                            <div v-else class="text-danger">
+                                <b-icon icon="exclamation-circle-fill"></b-icon>
+                                <strong>Something went wrong, try again by reloading</strong>
+                            </div>
+                        </template>
+                    </b-table>
+                    <applicant-modal :applicant-data="applicantData"/>
                 </b-row>
             </b-container>
         </b-row>
@@ -57,11 +39,16 @@
         </b-row>
     </b-container>
 </template>
+
 <script>
 import { mapActions } from 'vuex';
+import { applicants } from '../api/applicants';
+import ApplicantModal from './ApplicantModal';
 export default {
     name: 'ApplicantTable',
-    props: ['applicants'],
+    components: [
+        ApplicantModal
+    ],
     data () {
         return {
             list: [],
@@ -74,32 +61,16 @@ export default {
             loadingError: false,
             selected: undefined,
             viewApplicant: {},
-            availabilityList: [
-                {
-                    from_date: '2020-05-06',
-                    to_date: '2020-06-06'
-                },
-                {
-                    from_date: '2020-07-06',
-                    to_date: '2020-08-06'
-                },
-                {
-                    from_date: '2020-08-27',
-                    to_date: '2020-09-27'
-                },
-                {
-                    from_date: '2020-05-06',
-                    to_date: '2020-06-06'
-                },
-                {
-                    from_date: '2020-07-06',
-                    to_date: '2020-08-06'
-                },
-                {
-                    from_date: '2020-08-27',
-                    to_date: '2020-09-27'
-                }
-            ]
+            applicantData: {
+                availability: [],
+                competence: []
+            },
+            /* TODO could be hardcoded in frontend */
+            competences: {
+                1: 'ticket sales',
+                2: 'lotteries',
+                3: 'roller coaster operation'
+            }
         };
     },
     methods: {
@@ -118,14 +89,26 @@ export default {
                 this.loadingError = true;
             }
         },
-        onRowSelected ([selected]) {
-            console.log(selected);
-
+        async onRowSelected ([selected]) {
+            /* show the popup window */
             if (selected) {
-                this.$bvModal.show('applicant-modal');
-                this.viewApplicant = selected;
+                try {
+                    const data = await applicants.getApplication(selected.id);
+                    this.applicantData = data;
+
+                    this.$bvModal.show('applicant-modal');
+                    this.viewApplicant = selected;
+                } catch (error) {
+                    this.loadingError = true;
+                }
             }
             this.selected = selected;
+        },
+        acceptApplicant () {
+            alert('Applicant was accepted');
+        },
+        rejectApplicant () {
+            alert('Applicant was rejected');
         }
     },
     mounted () {
@@ -135,8 +118,16 @@ export default {
         });
     },
     computed: {
-    },
-    watch: {
+        competence () {
+            return this.applicantData.competence?.map((c) => {
+                const comp = this.competences[c.competenceId];
+
+                return {
+                    competence: comp.charAt(0).toUpperCase() + comp.slice(1), // capitalize
+                    yearsOfExperience: c.yearsOfExperience
+                };
+            });
+        }
     }
 };
 </script>

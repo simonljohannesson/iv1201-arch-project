@@ -1,17 +1,25 @@
 package se.kth.iv1201.group6.recruitmentApplication.repository;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import se.kth.iv1201.group6.recruitmentApplication.dao.CompetenceProfileDao;
+import se.kth.iv1201.group6.recruitmentApplication.model.CompetenceProfile;
 
+/**
+ * Simple CRUD repository for competence entity
+ */
 @Repository
-public interface CompetenceRepository extends CrudRepository<CompetenceProfileDao, Long>{
-    // @Query("SELECT a FROM CompetenceProfileDao a LEFT JOIN a.competence c WHERE a.competenceId = c.id")
-    @Query("SELECT a FROM CompetenceProfileDao a")
-    Collection<CompetenceProfileDao> findCompetence(Long applicantId);
+@Transactional
+public interface CompetenceRepository extends CrudRepository<CompetenceProfile, Long>{
+    /**
+     * Find all competence data of an applicant
+     * @param applicantId
+     * @return A collection of the competence data
+     */
+    @Query("SELECT a FROM CompetenceProfile a WHERE a.applicantId = :applicantId")
+    Collection<CompetenceProfile> findCompetence(Long applicantId);
 }
