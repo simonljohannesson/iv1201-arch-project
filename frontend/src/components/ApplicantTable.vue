@@ -27,7 +27,49 @@
                             </div>
                         </template>
                     </b-table>
-                    <applicant-modal :applicant-data="applicantData"/>
+
+                    <b-modal id="applicant-modal"
+                        :title="`${viewApplicant.name} ${viewApplicant.lastName}`"
+                    >
+                        <b-container>Name: <b>{{`${viewApplicant.name} ${viewApplicant.lastName}`}}</b></b-container>
+                        <b-container>Email: <b>{{viewApplicant.email}}</b></b-container>
+                        <b-container>Person number: <b>{{viewApplicant.pnr}}</b></b-container>
+
+                        <h3>Competence</h3>
+                        <b-table
+                            ref="competenceTable"
+                            striped
+                            :items="competence"
+                            show-empty
+                        >
+                            <template #empty>
+                                <h4>No competence to show</h4>
+                            </template>
+                        </b-table>
+                        <h3>Availability</h3>
+                        <b-table
+                            ref="availabilityTable"
+                            striped
+                            :items="applicantData.availability"
+                            show-empty
+                        >
+                            <template #empty>
+                                <h4>No availability to show</h4>
+                            </template>
+                        </b-table>
+
+                        <!-- Modal footer -->
+                        <template #modal-footer>
+                            <!-- Emulate built in modal footer ok and cancel button actions -->
+                            <b-button size="lg" variant="success" @click="acceptApplicant()">
+                                Accept
+                            </b-button>
+                            <b-button size="lg" variant="danger" @click="rejectApplicant()">
+                                Reject
+                            </b-button>
+                        </template>
+                    </b-modal>
+
                 </b-row>
             </b-container>
         </b-row>
@@ -43,12 +85,8 @@
 <script>
 import { mapActions } from 'vuex';
 import { applicants } from '../api/applicants';
-import ApplicantModal from './ApplicantModal';
 export default {
     name: 'ApplicantTable',
-    components: [
-        ApplicantModal
-    ],
     data () {
         return {
             list: [],
@@ -65,7 +103,7 @@ export default {
                 availability: [],
                 competence: []
             },
-            /* TODO could be hardcoded in frontend */
+            /* TODO  */
             competences: {
                 1: 'ticket sales',
                 2: 'lotteries',
@@ -114,7 +152,7 @@ export default {
     mounted () {
         this.loadApplicants();
         this.$root.$on('bv::modal::hidden', () => {
-            this.$refs.applicantTable.clearSelected();
+            this.$refs.applicantTable && this.$refs.applicantTable.clearSelected();
         });
     },
     computed: {
@@ -128,6 +166,8 @@ export default {
                 };
             });
         }
+    },
+    watch: {
     }
 };
 </script>

@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import se.kth.iv1201.group6.recruitmentApplication.model.CompetenceProfile;
 
 /**
- * Simple CRUD repository for competence entity
+ * Simple CRUD repository for CompetenceProfile entity
  */
 @Repository
 @Transactional
-public interface CompetenceRepository extends CrudRepository<CompetenceProfile, Long>{
+public interface CompetenceProfileRepository extends CrudRepository<CompetenceProfile, Long>{
     /**
      * Find all competence data of an applicant
      * @param applicantId

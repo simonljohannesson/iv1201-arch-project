@@ -17,7 +17,7 @@ import se.kth.iv1201.group6.recruitmentApplication.model.Availability;
 import se.kth.iv1201.group6.recruitmentApplication.model.CompetenceProfile;
 import se.kth.iv1201.group6.recruitmentApplication.repository.ApplicantRepository;
 import se.kth.iv1201.group6.recruitmentApplication.repository.AvailabilityRepository;
-import se.kth.iv1201.group6.recruitmentApplication.repository.CompetenceRepository;
+import se.kth.iv1201.group6.recruitmentApplication.repository.CompetenceProfileRepository;
 import se.kth.iv1201.group6.recruitmentApplication.repository.CreateApplicantRepository;
 
 import java.util.Collection;
@@ -41,7 +41,7 @@ public class ApplicantService {
     private AvailabilityRepository availabilityRepository;
 
     @Autowired
-    private CompetenceRepository competenceRepository;
+    private CompetenceProfileRepository competenceRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
