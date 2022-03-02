@@ -12,6 +12,7 @@ import se.kth.iv1201.group6.recruitmentApplication.dto.CompetenceProfileDto;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CreateApplicantDto;
 import se.kth.iv1201.group6.recruitmentApplication.enums.ReasonEnum;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
+import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantNotFoundException;
 import se.kth.iv1201.group6.recruitmentApplication.model.Applicant;
 import se.kth.iv1201.group6.recruitmentApplication.model.Availability;
 import se.kth.iv1201.group6.recruitmentApplication.model.CompetenceProfile;
@@ -83,15 +84,22 @@ public class ApplicantService {
      * Get an applicants data concerning an application
      * @param applicantId The id of the applicant
      * @return ApplicantDataDto competences and availability
+     * @throws ApplicantNotFoundException
      */
     @Transactional
-    public ApplicantDataDto getApplicantData(Long applicantId) {
-        var availability = availabilityRepository.findAvailability(applicantId);
-        Collection<AvailabilityDto> availabilityDtos = availability.stream().map(a -> new AvailabilityDto(a)).collect(Collectors.toList());
+    public ApplicantDataDto getApplicantData(Long applicantId) throws ApplicantNotFoundException {
+        var applicant = applicantRepository.findById(applicantId);
         
-        var competence = competenceRepository.findCompetence(applicantId);
-        Collection<CompetenceProfileDto> competenceDtos = competence.stream().map(a -> new CompetenceProfileDto(a)).collect(Collectors.toList());
-        
-        return new ApplicantDataDto(availabilityDtos, competenceDtos);
+        if (applicant.isPresent()) {
+            var availability = availabilityRepository.findAvailability(applicantId);
+            Collection<AvailabilityDto> availabilityDtos = availability.stream().map(a -> new AvailabilityDto(a)).collect(Collectors.toList());
+            
+            var competence = competenceRepository.findCompetence(applicantId);
+            Collection<CompetenceProfileDto> competenceDtos = competence.stream().map(a -> new CompetenceProfileDto(a)).collect(Collectors.toList());
+            
+            return new ApplicantDataDto(availabilityDtos, competenceDtos);
+        } else {
+            throw new ApplicantNotFoundException("Applicant not found.");
+        }
     }
 }

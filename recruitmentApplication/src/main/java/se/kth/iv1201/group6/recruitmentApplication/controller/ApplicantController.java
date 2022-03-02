@@ -14,6 +14,7 @@ import se.kth.iv1201.group6.recruitmentApplication.dto.CreateApplicantDto;
 import se.kth.iv1201.group6.recruitmentApplication.enums.ApiErrorCode;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApiException;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
+import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantNotFoundException;
 import se.kth.iv1201.group6.recruitmentApplication.model.Applicant;
 import se.kth.iv1201.group6.recruitmentApplication.service.ApplicantService;
 
@@ -49,7 +50,13 @@ public class ApplicantController {
     @PreAuthorize("hasAnyRole('ROLE_RECRUITER')") // TODO should a user get its own data?
     @GetMapping("/{id}/data")
     public ApplicantDataDto getApplicantData(@PathVariable(value = "id") Long applicantId) {
-        return applicantService.getApplicantData(applicantId);
+        try {
+            return applicantService.getApplicantData(applicantId);
+        } catch (ApplicantNotFoundException e) {
+            var errorCode = ApiErrorCode.NOT_FOUND;
+
+            throw new ApiException(HttpStatus.NOT_FOUND, e.getMessage(), errorCode);
+        }
     }
 
     /**
