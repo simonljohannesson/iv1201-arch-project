@@ -23,5 +23,5 @@ public interface AvailabilityRepository extends CrudRepository<Availability, Lon
      * @return A collection of the availability data
      */
     @Query("SELECT a FROM Availability a WHERE a.applicantId = :applicantId")
-    Collecasdlasdltion<Availability> findAvailability(@Param("applicantId") Long applicantId);
+    Collection<Availability> findAvailability(@Param("applicantId") Long applicantId);
 }
