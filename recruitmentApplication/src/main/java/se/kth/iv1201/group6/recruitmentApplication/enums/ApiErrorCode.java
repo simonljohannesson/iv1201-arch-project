@@ -15,7 +15,8 @@ public enum ApiErrorCode {
 
     DUPLICATE_EMAIL(100),
     DUPLICATE_USERNAME(101),
-    DUPLICATE_PNR(102);
+    DUPLICATE_PNR(102),
+    NOT_FOUND(103);
 
 
 

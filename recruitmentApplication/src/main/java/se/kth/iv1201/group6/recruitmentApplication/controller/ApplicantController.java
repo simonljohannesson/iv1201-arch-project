@@ -7,19 +7,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import se.kth.iv1201.group6.recruitmentApplication.dto.ApplicantDataDto;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CreateApplicantDto;
 import se.kth.iv1201.group6.recruitmentApplication.enums.ApiErrorCode;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApiException;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
+import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantNotFoundException;
 import se.kth.iv1201.group6.recruitmentApplication.model.Applicant;
 import se.kth.iv1201.group6.recruitmentApplication.service.ApplicantService;
 
 import javax.validation.Valid;
 
-@Controller
-@ResponseBody
+@RestController
 @RequestMapping("users/applicants")
 public class ApplicantController {
 
@@ -39,6 +40,25 @@ public class ApplicantController {
         Pageable paging = PageRequest.of(page, size);
         return applicantService.findAll(paging);
     }
+
+    /**
+     * Get an applicants application data
+     * @param applicantId The id of the applicant
+     * @return Availability and competences of applicant
+     */
+    @CrossOrigin
+    @PreAuthorize("hasAnyRole('ROLE_RECRUITER')") // TODO should a user get its own data?
+    @GetMapping("/{id}/data")
+    public ApplicantDataDto getApplicantData(@PathVariable(value = "id") Long applicantId) {
+        try {
+            return applicantService.getApplicantData(applicantId);
+        } catch (ApplicantNotFoundException e) {
+            var errorCode = ApiErrorCode.NOT_FOUND;
+
+            throw new ApiException(HttpStatus.NOT_FOUND, e.getMessage(), errorCode);
+        }
+    }
+
     /**
      * Create a new applicant.
      *

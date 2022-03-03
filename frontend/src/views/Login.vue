@@ -26,6 +26,7 @@
                     >Login</b-button
                 >
             </b-form>
+            <b>Don't have an account?<b-button @click="signup" variant="link">Sign up</b-button></b>
 
         </b-card>
     </div>
@@ -47,6 +48,9 @@ export default {
             const status = await this.login({ username: this.username, password: this.password });
             if (status === true) this.$router.push('/');
             else this.error = status.msg;
+        },
+        signup () {
+            this.$router.push('/signup');
         }
     }
 };
