@@ -6,7 +6,9 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
 
-
+/**
+ * Class used to filter internal server exceptions caught by Spring.
+ */
 public class ErrorAttributesFilter extends DefaultErrorAttributes {
     @Override
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {

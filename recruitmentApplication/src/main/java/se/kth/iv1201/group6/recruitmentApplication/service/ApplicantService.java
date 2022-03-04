@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import se.kth.iv1201.group6.recruitmentApplication.dao.CreateApplicantDao;
+import se.kth.iv1201.group6.recruitmentApplication.model.CreateApplicant;
 import se.kth.iv1201.group6.recruitmentApplication.dto.ApplicantDataDto;
 import se.kth.iv1201.group6.recruitmentApplication.dto.AvailabilityDto;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CompetenceProfileDto;
@@ -14,8 +14,6 @@ import se.kth.iv1201.group6.recruitmentApplication.enums.ReasonEnum;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantNotFoundException;
 import se.kth.iv1201.group6.recruitmentApplication.model.Applicant;
-import se.kth.iv1201.group6.recruitmentApplication.model.Availability;
-import se.kth.iv1201.group6.recruitmentApplication.model.CompetenceProfile;
 import se.kth.iv1201.group6.recruitmentApplication.repository.ApplicantRepository;
 import se.kth.iv1201.group6.recruitmentApplication.repository.AvailabilityRepository;
 import se.kth.iv1201.group6.recruitmentApplication.repository.CompetenceProfileRepository;
@@ -67,7 +65,7 @@ public class ApplicantService {
                 = createApplicantRepository.findByUniqueFields(applicant.username, applicant.pnr, applicant.email).get();
 
         if(users.isEmpty()){
-            var usr = new CreateApplicantDao(applicant);
+            var usr = new CreateApplicant(applicant);
             usr.password = passwordEncoder.encode(usr.password);
             createApplicantRepository.save(usr);
         } else {
