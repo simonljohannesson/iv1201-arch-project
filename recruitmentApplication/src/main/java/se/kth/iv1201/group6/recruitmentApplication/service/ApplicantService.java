@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import se.kth.iv1201.group6.recruitmentApplication.model.CreateApplicant;
 import se.kth.iv1201.group6.recruitmentApplication.dto.ApplicantDataDto;
 import se.kth.iv1201.group6.recruitmentApplication.dto.AvailabilityDto;
@@ -22,12 +24,12 @@ import se.kth.iv1201.group6.recruitmentApplication.repository.CreateApplicantRep
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
 
 /**
  * Service for handling Applicants
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ApplicantService {
 
     @Autowired
@@ -59,7 +61,6 @@ public class ApplicantService {
      * @param applicant new applicant to create
      * @throws ApplicantConflictException Username, pnr, or email is already used.
      */
-    @Transactional
     public void createApplicant(CreateApplicantDto applicant) throws ApplicantConflictException {
         var users
                 = createApplicantRepository.findByUniqueFields(applicant.username, applicant.pnr, applicant.email).get();
@@ -84,7 +85,6 @@ public class ApplicantService {
      * @return ApplicantDataDto competences and availability
      * @throws ApplicantNotFoundException
      */
-    @Transactional
     public ApplicantDataDto getApplicantData(Long applicantId) throws ApplicantNotFoundException {
         var applicant = applicantRepository.findById(applicantId);
         
