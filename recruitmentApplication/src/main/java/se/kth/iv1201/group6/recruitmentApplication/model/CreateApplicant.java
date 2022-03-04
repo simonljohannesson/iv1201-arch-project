@@ -1,13 +1,16 @@
-package se.kth.iv1201.group6.recruitmentApplication.dao;
+package se.kth.iv1201.group6.recruitmentApplication.model;
 
 import se.kth.iv1201.group6.recruitmentApplication.enums.UserRole;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CreateApplicantDto;
 
 import javax.persistence.*;
 
+/**
+ * Object for creating a new applicant.
+ */
 @Entity
 @Table(name = "person")
-public class CreateApplicantDao {
+public class CreateApplicant {
 
     @Id
     @Column(name = "person_id")
@@ -25,10 +28,10 @@ public class CreateApplicantDao {
     @Column(name = "role_id")
     public final int role = UserRole.APPLICANT.getValue();
 
-    public CreateApplicantDao() {
+    public CreateApplicant() {
     }
 
-    public CreateApplicantDao(CreateApplicantDto createApplicantDto){
+    public CreateApplicant(CreateApplicantDto createApplicantDto){
         name = createApplicantDto.name;
         surname = createApplicantDto.surname;
         pnr = createApplicantDto.pnr;

@@ -3,6 +3,9 @@ package se.kth.iv1201.group6.recruitmentApplication.exception;
 
 import se.kth.iv1201.group6.recruitmentApplication.enums.ReasonEnum;
 
+/**
+ * Represents some conflict with applicants.
+ */
 public class ApplicantConflictException extends Exception {
     private ReasonEnum reason;
 
