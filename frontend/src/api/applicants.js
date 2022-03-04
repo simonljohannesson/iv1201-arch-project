@@ -23,6 +23,11 @@ const applicants = {
             return error.response.status;
         }
     },
+    /**
+     * Try to create a new applicant
+     * @param {*} applicantData 
+     * @returns Promise
+     */
     create: async (applicantData) => {
         const requestConfig = {
             method: 'POST',
