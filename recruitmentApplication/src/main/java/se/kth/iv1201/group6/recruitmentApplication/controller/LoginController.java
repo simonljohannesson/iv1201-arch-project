@@ -10,7 +10,7 @@ import java.security.Principal;
 @RestController
 public class LoginController {
 
-    @PreAuthorize("hasAnyRole('ROLE_RECRUITER')")
+    @PreAuthorize("hasAnyRole('ROLE_RECRUITER', 'ROLE_APPLICANT)")
     @GetMapping("/user")
     public Object user(Principal user) {
         return new Object(){
