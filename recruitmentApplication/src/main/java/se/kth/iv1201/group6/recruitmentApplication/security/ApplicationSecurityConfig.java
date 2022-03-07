@@ -55,7 +55,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setMaxAge(3600L);
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8081", "https://iv1201-db.herokuapp.com/"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8081", "https://iv1201-web.herokuapp.com/"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST"));
         configuration.setAllowedHeaders(Collections.singletonList("*")); // before was "*"
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
