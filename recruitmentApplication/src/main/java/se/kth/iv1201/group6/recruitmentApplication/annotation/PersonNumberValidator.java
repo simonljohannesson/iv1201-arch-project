@@ -3,8 +3,17 @@ package se.kth.iv1201.group6.recruitmentApplication.annotation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * Validator class for validation of person numbers.
+ */
 public class PersonNumberValidator implements ConstraintValidator<PersonNumberValidation, String> {
 
+    /**
+     * Checks if a person number is valid
+     * @param s person number to check
+     * @param constraintValidatorContext
+     * @return
+     */
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
         return personalNumberValidation(s);

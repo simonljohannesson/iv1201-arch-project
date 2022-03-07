@@ -5,7 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import se.kth.iv1201.group6.recruitmentApplication.dao.CreateApplicantDao;
+import org.springframework.transaction.annotation.Transactional;
+
+import se.kth.iv1201.group6.recruitmentApplication.model.CreateApplicant;
 import se.kth.iv1201.group6.recruitmentApplication.dto.ApplicantDataDto;
 import se.kth.iv1201.group6.recruitmentApplication.dto.AvailabilityDto;
 import se.kth.iv1201.group6.recruitmentApplication.dto.CompetenceProfileDto;
@@ -14,8 +16,6 @@ import se.kth.iv1201.group6.recruitmentApplication.enums.ReasonEnum;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantConflictException;
 import se.kth.iv1201.group6.recruitmentApplication.exception.ApplicantNotFoundException;
 import se.kth.iv1201.group6.recruitmentApplication.model.Applicant;
-import se.kth.iv1201.group6.recruitmentApplication.model.Availability;
-import se.kth.iv1201.group6.recruitmentApplication.model.CompetenceProfile;
 import se.kth.iv1201.group6.recruitmentApplication.repository.ApplicantRepository;
 import se.kth.iv1201.group6.recruitmentApplication.repository.AvailabilityRepository;
 import se.kth.iv1201.group6.recruitmentApplication.repository.CompetenceProfileRepository;
@@ -24,12 +24,12 @@ import se.kth.iv1201.group6.recruitmentApplication.repository.CreateApplicantRep
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
 
 /**
  * Service for handling Applicants
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ApplicantService {
 
     @Autowired
@@ -61,13 +61,12 @@ public class ApplicantService {
      * @param applicant new applicant to create
      * @throws ApplicantConflictException Username, pnr, or email is already used.
      */
-    @Transactional
     public void createApplicant(CreateApplicantDto applicant) throws ApplicantConflictException {
         var users
                 = createApplicantRepository.findByUniqueFields(applicant.username, applicant.pnr, applicant.email).get();
 
         if(users.isEmpty()){
-            var usr = new CreateApplicantDao(applicant);
+            var usr = new CreateApplicant(applicant);
             usr.password = passwordEncoder.encode(usr.password);
             createApplicantRepository.save(usr);
         } else {
@@ -86,7 +85,6 @@ public class ApplicantService {
      * @return ApplicantDataDto competences and availability
      * @throws ApplicantNotFoundException
      */
-    @Transactional
     public ApplicantDataDto getApplicantData(Long applicantId) throws ApplicantNotFoundException {
         var applicant = applicantRepository.findById(applicantId);
         
