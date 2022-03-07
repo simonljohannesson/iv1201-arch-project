@@ -20,6 +20,9 @@ import se.kth.iv1201.group6.recruitmentApplication.service.ApplicantService;
 
 import javax.validation.Valid;
 
+/**
+ * Controller class for handling Applicants
+ */
 @RestController
 @RequestMapping("users/applicants")
 public class ApplicantController {

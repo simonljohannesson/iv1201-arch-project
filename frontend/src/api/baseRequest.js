@@ -1,6 +1,5 @@
 const axios = require('axios');
 
-// axios.defaults.baseURL = process.env.VUE_APP_REST_SERVER_ADRESS;
 axios.defaults.withCredentials = true;
 
 /**
@@ -16,19 +15,5 @@ export async function sendRequest (requestConfig) {
     requestConfig.headers = {};
     requestConfig.headers['X-Requested-With'] = 'XMLHttpRequest';
 
-    // const config = {
-    //     method: method,
-    //     url: endpoint,
-    //     headers: {
-    //         'X-Requested-With': 'XMLHttpRequest'
-    //     }
-    // };
-
-    // if (username && password) {
-    //     config.auth = {
-    //         username: username,
-    //         password: password
-    //     };
-    // }
     return await axios(requestConfig);
 }
