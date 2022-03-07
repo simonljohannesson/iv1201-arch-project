@@ -1,0 +1,38 @@
+version: '3.1'
+services:
+  backend:
+    image: maven:3.8.4-openjdk-17-slim
+    container_name: server
+    command: mvn spring-boot:run
+    ports:
+      - 8080:8080
+    volumes:
+      - ./recruitmentApplication:/usr/src/app:rw
+    working_dir: /usr/src/app
+    depends_on:
+      - database
+    networks:
+      - recruitmentNetwork
+
+  database:
+    image: postgres
+    container_name: recruitmentDB
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: example # sets the superuser password for PostgreSQL
+      POSTGRES_USER: postgres # optional environment variable is used in conjunction with POSTGRES_PASSWORD to set a user and its password
+      POSTGRES_DB: recruitment # This optional environment variable can be used to define a different name for the default database that is created when the image is first started. If it is not specified, then the value of POSTGRES_USER will be used.
+      # POSTGRES_HOST_AUTH_METHOD: # do we need a password
+    volumes:
+      # Uncomment below to maintain the peristant data
+      # - platops-data:/var/lib/postgresql/data/
+      # Uncomment bellow to intialize the container with data by creating the respective file
+      #- ./existing-database.sql:/docker-entrypoint-initdb.d/existing-database.sql
+      - ./database_migrated_v1.sql:/docker-entrypoint-initdb.d/database_migrated_v1.sql
+    networks:
+      - recruitmentNetwork
+
+networks:
+  recruitmentNetwork:
