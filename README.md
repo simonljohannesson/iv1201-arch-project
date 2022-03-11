@@ -1,8 +1,9 @@
-# iv1201-arch-project
+# Recruitment Application - IV1201 project
 
-This is a project in the course iv1201 at kth.
+This is a project in the course iv1201 at kth. For more information about the project please visit the [Wiki](https://github.com/simonljohannesson/iv1201-arch-project/wiki).
 
 ## [Backlog](https://github.com/simonljohannesson/iv1201-arch-project/projects/1)
+In the backlog you can find out what needs to be done in the project.
 
 ## Decision log
 
