@@ -40,8 +40,12 @@ public class ApplicantController {
     @CrossOrigin
     @PreAuthorize("hasAnyRole('ROLE_RECRUITER')")
     public Page<Applicant> getApplicants(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-        Pageable paging = PageRequest.of(page, size);
-        return applicantService.findAll(paging);
+        try {
+            Pageable paging = PageRequest.of(page, size);
+            return applicantService.findAll(paging);
+        }catch (IllegalArgumentException e){
+            throw new ApiException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     /**
